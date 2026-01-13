@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI News Reader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📰 AI News Reader</h1>
+
+        <form method="POST">
+            <label>Days back:</label>
+            <input type="number" name="days" value="0">
+
+            <label>Topic:</label>
+            <select name="topic">
+                <option value="India">India</option>
+                <option value="World">World</option>
+                <option value="Technology">Technology</option>
+            </select>
+
+            <button type="submit">Get News</button>
+        </form>
+
+        {% if news %}
+            <h2>News from {{ date }}</h2>
+            <ol>
+                {% for item in news %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ol>
+
+            <audio controls autoplay>
+             <source src="{{ url_for('static', filename='news_audio.wav') }}" type="audio/wav">
+            </audio>
+        {% endif %}
+    </div>
+</body>
+</html>
